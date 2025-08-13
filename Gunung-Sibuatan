@@ -1,0 +1,76 @@
+-- LocalScript (taruh di StarterPlayerScripts)
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+
+-- Daftar titik teleport
+local teleportPoints = {
+    Vector3.new(987.44, 113.07, -701.60),
+    Vector3.new(-311.60, 155.30, -325.15),
+    Vector3.new(-730.43, 589.27, -124.06),
+    Vector3.new(-883.60, 993.07, -204.02),
+    Vector3.new(-1637.70, 993.27, 280.60),
+    Vector3.new(-1648.94, 995.41, 631.69),
+    Vector3.new(-1636.95, 1113.27, 2152.27),
+    Vector3.new(-519.61, 1449.27, 3278.64),
+    Vector3.new(-708.06, 1893.27, 2383.03),
+    Vector3.new(-859.19, 1941.07, 2071.56),
+    Vector3.new(-867.59, 2101.27, 1668.06),
+    Vector3.new(-901.85, 2341.27, 1439.11),
+    Vector3.new(-847.45, 2765.27, 1506.33),
+    Vector3.new(-613.96, 3285.27, 1919.42),
+    Vector3.new(-236.02, 3404.47, 2579.58),
+    Vector3.new(309.22, 3541.27, 3040.38),
+    Vector3.new(441.53, 3597.27, 3562.48),
+    Vector3.new(912.20, 3665.27, 4149.19),
+    Vector3.new(1420.08, 3905.27, 4996.10),
+    Vector3.new(1668.23, 4285.27, 5189.91),
+    Vector3.new(1719.59, 4469.07, 5172.03),
+    Vector3.new(1865.45, 4653.24, 5199.85),
+    Vector3.new(1901.51, 4961.27, 5155.70),
+    Vector3.new(2849.25, 5073.27, 5242.05),
+    Vector3.new(3461.97, 5241.27, 5122.99),
+    Vector3.new(4578.59, 5477.27, 5263.88),
+    Vector3.new(4636.12, 4949.06, 5234.78),
+    Vector3.new(4624.94, 4564.90, 5243.44),
+    Vector3.new(4878.23, 3984.74, 5183.09),
+    Vector3.new(5831.22, 3996.78, 5742.74),
+    Vector3.new(6630.86, 4222.67, 5577.53),
+    Vector3.new(7478.55, 4222.60, 5305.92),
+    Vector3.new(8214.15, 4329.27, 4894.76),
+    Vector3.new(8695.66, 4481.27, 4543.70),
+    Vector3.new(8786.30, 4537.27, 4346.36),
+    Vector3.new(9197.82, 5073.27, 2464.94),
+    Vector3.new(9188.05, 5321.02, 2459.36),
+    Vector3.new(9077.57, 5892.71, 2040.80),
+    Vector3.new(9187.73, 6216.58, 1986.07),
+    Vector3.new(9062.79, 6497.68, 1827.85),
+    Vector3.new(8693.97, 6528.91, 1290.27),
+    Vector3.new(8395.36, 6557.23, 1141.78),
+    Vector3.new(7993.56, 6607.87, 1015.95),
+    Vector3.new(7138.85, 6773.27, 377.82),
+    Vector3.new(6571.43, 6966.13, 253.91),
+    Vector3.new(6041.56, 6965.27, 252.81),
+    Vector3.new(4874.68, 7145.27, 679.20),
+    Vector3.new(5394.25, 8109.07, 2205.97)
+}
+
+-- Fungsi teleport
+local function teleportTo(pos)
+	if player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+		player.Character.HumanoidRootPart.CFrame = CFrame.new(pos)
+	end
+end
+
+-- Loop teleport aman
+while true do
+    -- Pastikan karakter siap setiap loop
+    if not player.Character or not player.Character:FindFirstChild("HumanoidRootPart") then
+        player.CharacterAdded:Wait()
+        player.Character:WaitForChild("HumanoidRootPart")
+    end
+
+    for _, point in ipairs(teleportPoints) do
+        teleportTo(point)
+        task.wait(6) -- jeda 6 detik
+    end
+end
